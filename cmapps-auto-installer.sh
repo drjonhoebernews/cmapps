@@ -1,5 +1,9 @@
 #!/bin/bash
+echo -e "\e[31mCMApps\e[0m"
+
 echo -e "\e[32mBaşlıyorum Hazırmısın.\e[0m"
+dnf udapte -y
+echo -e "\e[32mSunucunu güncelliyorum.\e[0m"
 
 echo -e "\e[32m3.\e[0m"
 sleep 1
@@ -149,4 +153,14 @@ echo -e "\e[32m2.\e[0m"
 sleep 1
 echo -e "\e[32m1.\e[0m"
 sleep 1
-echo -e "\e[32mve işlemleri bitirdim şimdi api.expressbuchen.net den giriş yapabilirsin.\e[0m"
+echo -e "\e[32mve işlemleri bitirdim şimdi api.expressbuchen.net için SSL işlemlerini yapıyorum.\e[0m"
+
+#!/bin/bash
+echo -e "\e[32m1. Certbot ve Nginx plugin'inin yüklenmesi...\e[0m"
+sudo dnf install certbot python3-certbot-nginx
+echo -e "\e[32m2. SSL sertifikası oluşturma ve Nginx konfigürasyonunu güncelleme...\e[0m"
+sudo certbot --nginx --non-interactive --agree-tos --email admin@expressbuchen.net -d api.expressbuchen.net
+echo -e "\e[32m3. Sertifikanın doğru bir şekilde yenilendiğini doğrulama...\e[0m"
+sudo certbot renew --dry-run
+echo -e "\e[32mTüm işlemler başarıyla tamamlandı.\e[0m"
+
