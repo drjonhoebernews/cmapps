@@ -73,6 +73,9 @@ cd /var/www
 git pull https://github.com/HamzaTanik/API.git
 sudo chown -R root:nginx /var/www/aPI
 sudo chmod -R 755 /var/www/API
+# shellcheck disable=SC2164
+cd /var/www/API
+php artisan storage:link
 setenforce 0
 sudo systemctl restart nginx
 echo -e "\e[32m3.\e[0m"
@@ -157,6 +160,7 @@ echo -e "\e[32mve işlemleri bitirdim şimdi api.expressbuchen.net için SSL iş
 
 #!/bin/bash
 echo -e "\e[32m1. Certbot ve Nginx plugin'inin yüklenmesi...\e[0m"
+sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
 sudo dnf install certbot python3-certbot-nginx
 echo -e "\e[32m2. SSL sertifikası oluşturma ve Nginx konfigürasyonunu güncelleme...\e[0m"
 sudo certbot --nginx --non-interactive --agree-tos --email admin@expressbuchen.net -d api.expressbuchen.net
